@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
@@ -43,6 +46,7 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
+
         return view('jobs.edit', ['job' => $job]);
     }
 
@@ -52,8 +56,7 @@ class JobController extends Controller
             'title' => ['required', 'min:3'],
             'salary' => ['required']
         ]);
-        //authorize(on hold..)
-        //update the job
+        
         $job->update([
             'title' => request('title'),
             'salary' => request('salary')
